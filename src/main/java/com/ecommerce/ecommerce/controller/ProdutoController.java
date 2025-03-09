@@ -26,7 +26,7 @@ public class ProdutoController{
         return toDTO(produtoService.cadastrarProduto(toModel(produtoDTO)));
     }
 
-    @GetMapping("/visualizar")
+    @GetMapping("/visualizarTodos")
     public List<ProdutoDTO> visualizarProdutos(){
         return toDTO(produtoService.visualizarProdutos());
     }
