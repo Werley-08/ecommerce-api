@@ -6,6 +6,8 @@ import com.ecommerce.ecommerce.repository.interfaces.IProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ProdutoRepositoryImplement implements IProdutoRepository{
 
@@ -20,4 +22,7 @@ public class ProdutoRepositoryImplement implements IProdutoRepository{
     public Produto save(Produto produto){
         return produtoRepository.save(produto);
     }
+
+    @Override
+    public List<Produto> findAll(){ return produtoRepository.findAll(); }
 }

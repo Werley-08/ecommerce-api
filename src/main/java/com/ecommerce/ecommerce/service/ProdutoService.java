@@ -6,6 +6,8 @@ import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProdutoService implements IProdutoService {
 
@@ -19,5 +21,10 @@ public class ProdutoService implements IProdutoService {
     @Override
     public Produto cadastrarProduto(Produto produto){
         return produtoRepository.save(produto);
+    }
+
+    @Override
+    public List<Produto> visualizarProdutos(){
+        return produtoRepository.findAll();
     }
 }
