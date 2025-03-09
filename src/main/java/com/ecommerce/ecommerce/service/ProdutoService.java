@@ -20,14 +20,10 @@ public class ProdutoService implements IProdutoService {
     }
 
     @Override
-    public Produto cadastrarProduto(Produto produto){
-        return produtoRepository.save(produto);
-    }
+    public Produto cadastrarProduto(Produto produto){ return produtoRepository.save(produto); }
 
     @Override
-    public List<Produto> visualizarProdutos(){
-        return produtoRepository.findAll();
-    }
+    public List<Produto> visualizarProdutos(){ return produtoRepository.findAll(); }
 
     @Override
     public Produto visualizarProduto(Integer id){

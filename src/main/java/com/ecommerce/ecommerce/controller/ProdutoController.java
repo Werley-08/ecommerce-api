@@ -1,7 +1,6 @@
 package com.ecommerce.ecommerce.controller;
 
 import java.util.List;
-
 import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +16,7 @@ public class ProdutoController{
     private final IProdutoService produtoService;
 
     @Autowired
-    public ProdutoController(IProdutoService produtoService){
-        this.produtoService = produtoService;
-    }
+    public ProdutoController(IProdutoService produtoService){ this.produtoService = produtoService; }
 
     @PostMapping("/cadastrar")
     public ProdutoDTO cadastrarProduto(@RequestBody ProdutoDTO produtoDTO){
@@ -27,17 +24,11 @@ public class ProdutoController{
     }
 
     @GetMapping("/visualizarTodos")
-    public List<ProdutoDTO> visualizarProdutos(){
-        return toDTO(produtoService.visualizarProdutos());
-    }
+    public List<ProdutoDTO> visualizarProdutos(){ return toDTO(produtoService.visualizarProdutos()); }
 
     @GetMapping("/visualizar/{id}")
-    public ProdutoDTO visualizarProduto(@PathVariable Integer id){
-        return toDTO(produtoService.visualizarProduto(id));
-    }
+    public ProdutoDTO visualizarProduto(@PathVariable Integer id){ return toDTO(produtoService.visualizarProduto(id)); }
 
     @DeleteMapping("/deletar/{id}")
-    public void deletarProduto(@PathVariable Integer id){
-        produtoService.deletarProduto(id);
-    }
+    public void deletarProduto(@PathVariable Integer id){ produtoService.deletarProduto(id); }
 }
