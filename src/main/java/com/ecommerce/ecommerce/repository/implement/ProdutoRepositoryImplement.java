@@ -25,4 +25,7 @@ public class ProdutoRepositoryImplement implements IProdutoRepository{
 
     @Override
     public List<Produto> findAll(){ return produtoRepository.findAll(); }
+
+    @Override
+    public void deleteById(Integer id){ produtoRepository.deleteById(id); }
 }

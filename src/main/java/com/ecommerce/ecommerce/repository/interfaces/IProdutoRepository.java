@@ -6,4 +6,5 @@ import com.ecommerce.ecommerce.model.Produto;
 public interface IProdutoRepository {
     Produto save(Produto produto);
     List<Produto> findAll();
+    void deleteById(Integer id);
 }

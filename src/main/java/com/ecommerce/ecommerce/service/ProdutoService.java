@@ -27,4 +27,9 @@ public class ProdutoService implements IProdutoService {
     public List<Produto> visualizarProdutos(){
         return produtoRepository.findAll();
     }
+
+    @Override
+    public void deletarProduto(Integer id){
+        produtoRepository.deleteById(id);
+    }
 }

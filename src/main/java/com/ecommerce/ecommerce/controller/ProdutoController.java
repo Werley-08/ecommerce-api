@@ -30,4 +30,9 @@ public class ProdutoController{
     public List<ProdutoDTO> visualizarProdutos(){
         return toDTO(produtoService.visualizarProdutos());
     }
+
+    @DeleteMapping("/deletar/{id}")
+    public void deletarProduto(@PathVariable Integer id){
+        produtoService.deletarProduto(id);
+    }
 }
