@@ -31,6 +31,11 @@ public class ProdutoController{
         return toDTO(produtoService.visualizarProdutos());
     }
 
+    @GetMapping("/visualizar/{id}")
+    public ProdutoDTO visualizarProduto(@PathVariable Integer id){
+        return toDTO(produtoService.visualizarProduto(id));
+    }
+
     @DeleteMapping("/deletar/{id}")
     public void deletarProduto(@PathVariable Integer id){
         produtoService.deletarProduto(id);

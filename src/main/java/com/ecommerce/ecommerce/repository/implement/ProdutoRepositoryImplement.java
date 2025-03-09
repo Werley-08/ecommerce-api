@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProdutoRepositoryImplement implements IProdutoRepository{
@@ -25,6 +26,9 @@ public class ProdutoRepositoryImplement implements IProdutoRepository{
 
     @Override
     public List<Produto> findAll(){ return produtoRepository.findAll(); }
+
+    @Override
+    public Optional<Produto> findById(Integer id){ return produtoRepository.findById(id); }
 
     @Override
     public void deleteById(Integer id){ produtoRepository.deleteById(id); }

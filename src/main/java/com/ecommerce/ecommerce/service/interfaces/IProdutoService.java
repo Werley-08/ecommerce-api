@@ -7,5 +7,6 @@ import java.util.List;
 public interface IProdutoService {
     Produto cadastrarProduto(Produto produto);
     List<Produto> visualizarProdutos();
+    Produto visualizarProduto(Integer id);
     void deletarProduto(Integer id);
 }

@@ -3,6 +3,7 @@ package com.ecommerce.ecommerce.service;
 import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.repository.interfaces.IProdutoRepository;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,12 @@ public class ProdutoService implements IProdutoService {
     @Override
     public List<Produto> visualizarProdutos(){
         return produtoRepository.findAll();
+    }
+
+    @Override
+    public Produto visualizarProduto(Integer id){
+        return produtoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
     }
 
     @Override
