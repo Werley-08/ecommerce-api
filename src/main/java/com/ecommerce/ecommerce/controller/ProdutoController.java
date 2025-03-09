@@ -31,4 +31,9 @@ public class ProdutoController{
 
     @DeleteMapping("/deletar/{id}")
     public void deletarProduto(@PathVariable Integer id){ produtoService.deletarProduto(id); }
+
+    @PutMapping("/atualizar/{id}")
+    public ProdutoDTO atualizarProduto(@PathVariable Integer id, @RequestBody ProdutoDTO produtoDTO){
+        return toDTO(produtoService.atualizarProduto(id, toModel(produtoDTO)));
+    }
 }

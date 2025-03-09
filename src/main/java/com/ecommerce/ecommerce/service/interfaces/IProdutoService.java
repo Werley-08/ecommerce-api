@@ -9,4 +9,5 @@ public interface IProdutoService {
     List<Produto> visualizarProdutos();
     Produto visualizarProduto(Integer id);
     void deletarProduto(Integer id);
+    Produto atualizarProduto(Integer id, Produto produto);
 }

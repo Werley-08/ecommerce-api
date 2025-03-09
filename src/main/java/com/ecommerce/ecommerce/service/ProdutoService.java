@@ -35,4 +35,19 @@ public class ProdutoService implements IProdutoService {
     public void deletarProduto(Integer id){
         produtoRepository.deleteById(id);
     }
+
+    @Override
+    public Produto atualizarProduto(Integer id, Produto produtoAtualizado){
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
+
+        if(!produto.getId().equals(produtoAtualizado.getId())) {
+            throw new IllegalArgumentException("O id não pode ser atualizado!");
+        }
+
+        deletarProduto(produto.getId());
+        produtoAtualizado.setId(id);
+
+        return produtoRepository.save(produtoAtualizado);
+    }
 }
