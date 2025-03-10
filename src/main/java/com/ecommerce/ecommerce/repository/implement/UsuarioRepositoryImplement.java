@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.repository.implement;
 
+import com.ecommerce.ecommerce.model.Usuario;
 import com.ecommerce.ecommerce.repository.UsuarioRepository;
 import com.ecommerce.ecommerce.repository.interfaces.IUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,10 @@ public class UsuarioRepositoryImplement implements IUsuarioRepository {
     @Override
     public UserDetails findByLogin(String login){
         return usuarioRepository.findByLogin(login);
+    }
+
+    @Override
+    public Usuario save(Usuario usuario){
+        return usuarioRepository.save(usuario);
     }
 }

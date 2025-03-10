@@ -13,4 +13,13 @@ public interface UsuarioMapper{
                 usuarioDTO.getRole()
         );
     }
+
+    static UsuarioDTO toDTO(Usuario usuario){
+        return new UsuarioDTO(
+                usuario.getId(),
+                usuario.getLogin(),
+                usuario.getSenha(),
+                usuario.getRole()
+        );
+    }
 }

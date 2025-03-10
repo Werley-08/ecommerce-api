@@ -17,12 +17,12 @@ public class SecurityConfigurations{
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "/api/produtos").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/produtos").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/produtos").hasRole("ADMIN")
-                        .anyRequest().authenticated()
-                )
+//                .authorizeHttpRequests(authorize -> authorize
+//                        .requestMatchers(HttpMethod.POST, "/api/produtos").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.PUT, "/api/produtos").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/api/produtos").hasRole("ADMIN")
+//                        .anyRequest().authenticated()
+//                )
                .build();
     }
 }
