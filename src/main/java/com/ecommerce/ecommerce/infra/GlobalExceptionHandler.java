@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.infra;
 
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
 import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ProdutoUpdateException.class)
     public ResponseEntity<Map<String, Object>> handleProdutoUpdate(ProdutoUpdateException ex) {
         return buildErrorResponse(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ProdutoExistsException.class)
+    public ResponseEntity<Map<String, Object>> handleProdutoExists(ProdutoExistsException ex) {
+        return buildErrorResponse(ex.getMessage(), HttpStatus.CONFLICT);
     }
 
     private ResponseEntity<Map<String, Object>> buildErrorResponse(String message, HttpStatus status) {

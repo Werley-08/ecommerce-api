@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.service;
 
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
 import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.model.Produto;
@@ -21,7 +22,14 @@ public class ProdutoService implements IProdutoService {
     }
 
     @Override
-    public Produto cadastrarProduto(Produto produto){ return produtoRepository.save(produto); }
+    public Produto cadastrarProduto(Produto produto){
+
+        if(produtoRepository.findById(produto.getId()).isPresent()){
+            throw new ProdutoExistsException(produto.getId());
+        }
+
+        return produtoRepository.save(produto);
+    }
 
     @Override
     public List<Produto> visualizarProdutos(){ return produtoRepository.findAll(); }
