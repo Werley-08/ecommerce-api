@@ -1,10 +1,11 @@
 package com.ecommerce.ecommerce.controller;
 
-import java.util.List;
 import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.ecommerce.ecommerce.mapper.ProdutoMapper.toDTO;
 import static com.ecommerce.ecommerce.mapper.ProdutoMapper.toModel;

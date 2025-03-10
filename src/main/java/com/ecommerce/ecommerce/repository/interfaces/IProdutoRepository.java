@@ -1,9 +1,9 @@
 package com.ecommerce.ecommerce.repository.interfaces;
 
+import com.ecommerce.ecommerce.model.Produto;
+
 import java.util.List;
 import java.util.Optional;
-
-import com.ecommerce.ecommerce.model.Produto;
 
 public interface IProdutoRepository {
     Produto save(Produto produto);

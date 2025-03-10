@@ -5,7 +5,6 @@ import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.repository.interfaces.IProdutoRepository;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -3,8 +3,9 @@ package com.ecommerce.ecommerce.mapper;
 import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.model.Produto;
 import org.springframework.stereotype.Component;
-import java.util.stream.Collectors;
+
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public interface ProdutoMapper{
