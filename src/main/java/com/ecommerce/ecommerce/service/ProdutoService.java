@@ -1,5 +1,7 @@
 package com.ecommerce.ecommerce.service;
 
+import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
+import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.repository.interfaces.IProdutoRepository;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
@@ -28,7 +30,7 @@ public class ProdutoService implements IProdutoService {
     @Override
     public Produto visualizarProduto(Integer id){
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
     }
 
     @Override
@@ -39,10 +41,10 @@ public class ProdutoService implements IProdutoService {
     @Override
     public Produto atualizarProduto(Integer id, Produto produtoAtualizado){
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
 
         if(!produto.getId().equals(produtoAtualizado.getId())) {
-            throw new IllegalArgumentException("O id não pode ser atualizado!");
+            throw new ProdutoUpdateException();
         }
 
         deletarProduto(produto.getId());
