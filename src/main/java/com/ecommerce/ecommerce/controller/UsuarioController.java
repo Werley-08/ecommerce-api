@@ -1,10 +1,12 @@
 package com.ecommerce.ecommerce.controller;
 
+import com.ecommerce.ecommerce.dto.AuthDTO;
 import com.ecommerce.ecommerce.dto.UsuarioDTO;
 import com.ecommerce.ecommerce.model.Usuario;
 import com.ecommerce.ecommerce.service.UsuarioService;
 import com.ecommerce.ecommerce.service.interfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,5 +29,10 @@ public class UsuarioController{
     @PostMapping("/cadastrar")
     public UsuarioDTO cadastrarUsuario(@RequestBody UsuarioDTO usuarioDTO){
         return toDTO(usuarioService.cadastrarUsuario(toModel(usuarioDTO)));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity logarUsuario(@RequestBody AuthDTO usuario){
+        return usuarioService.logarUsuario(usuario);
     }
 }
