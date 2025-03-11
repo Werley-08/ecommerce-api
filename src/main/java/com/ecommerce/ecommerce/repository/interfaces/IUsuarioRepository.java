@@ -1,6 +1,5 @@
 package com.ecommerce.ecommerce.repository.interfaces;
 
-import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.model.Usuario;
 import org.springframework.security.core.userdetails.UserDetails;
 

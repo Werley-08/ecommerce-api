@@ -2,8 +2,6 @@ package com.ecommerce.ecommerce.controller;
 
 import com.ecommerce.ecommerce.dto.AuthDTO;
 import com.ecommerce.ecommerce.dto.UsuarioDTO;
-import com.ecommerce.ecommerce.model.Usuario;
-import com.ecommerce.ecommerce.service.UsuarioService;
 import com.ecommerce.ecommerce.service.interfaces.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
