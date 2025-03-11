@@ -1,9 +1,11 @@
 package com.ecommerce.ecommerce.service;
 
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
+import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
+import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.repository.interfaces.IProdutoRepository;
 import com.ecommerce.ecommerce.service.interfaces.IProdutoService;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +22,14 @@ public class ProdutoService implements IProdutoService {
     }
 
     @Override
-    public Produto cadastrarProduto(Produto produto){ return produtoRepository.save(produto); }
+    public Produto cadastrarProduto(Produto produto){
+
+        if(produtoRepository.findById(produto.getId()).isPresent()){
+            throw new ProdutoExistsException(produto.getId());
+        }
+
+        return produtoRepository.save(produto);
+    }
 
     @Override
     public List<Produto> visualizarProdutos(){ return produtoRepository.findAll(); }
@@ -28,7 +37,7 @@ public class ProdutoService implements IProdutoService {
     @Override
     public Produto visualizarProduto(Integer id){
         return produtoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
     }
 
     @Override
@@ -39,10 +48,10 @@ public class ProdutoService implements IProdutoService {
     @Override
     public Produto atualizarProduto(Integer id, Produto produtoAtualizado){
         Produto produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com o id: " + id));
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
 
         if(!produto.getId().equals(produtoAtualizado.getId())) {
-            throw new IllegalArgumentException("O id não pode ser atualizado!");
+            throw new ProdutoUpdateException();
         }
 
         deletarProduto(produto.getId());
