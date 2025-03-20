@@ -13,16 +13,16 @@ Este projeto será utilizado como base para estudar e implementar:
 
 ## Funcionalidades Básicas
 
-A API deve possuir funcionalidades básicas para um sistema de e-commerce, como:
+A API deve possuir funcionalidades básicas para um sistema de e-commerce:
 
-- **Cadastro de produtos**: A API permite cadastrar, listar, atualizar e excluir produtos no catálogo. Cada produto possui informações como nome, descrição, preço e quantidade em estoque.
+- **Cadastro de produtos**: A API permite cadastrar, listar, atualizar e excluir produtos no catálogo.
 
 ## Tecnologias Utilizadas 🛠️
 
 - **Java**
-- **Spring Boot**: Framework para construção da API RESTful 
-- **Spring Data JPA**: Para acesso ao banco de dados e operações CRUD 
-- **PostgreSQL**: Banco de dados relacional utilizado para armazenar as informações 
-- **Spring Security**: Para estudar e implementar autenticação e autorização 
-- **JUnit & Mockito**: Para escrever testes unitários e de integração 
-- **Flyway**: Ferramenta para gerenciar as migrações de banco de dados 
+- **Spring Boot**: Framework para construção da API
+- **Spring Data JPA**: acesso ao banco de dados 
+- **PostgreSQL**: Banco de dados utilizado para armazenar as informações 
+- **Spring Security**: Implementar autenticação e autorização 
+- **JUnit & Mockito**: Testes unitários
+- **Flyway**: Gerenciar as migrações de banco de dados 
