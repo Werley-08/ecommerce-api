@@ -91,6 +91,21 @@ public class ProdutoControllerTest {
     }
 
     @Test
+    @DisplayName("Should return 400 when trying to create a product with empty body")
+    public void CadastrarProdutoTest4() {
+
+        given()
+                .contentType(ContentType.JSON)
+                .body("")  // Corpo vazio
+
+                .when()
+                .post("/api/produtos/cadastrar")
+
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());  // Esperando 400 Bad Request
+    }
+
+    @Test
     @DisplayName("Should get 'produto' when the id is valid")
     public void VisualizarProdutoTest1() {
 
