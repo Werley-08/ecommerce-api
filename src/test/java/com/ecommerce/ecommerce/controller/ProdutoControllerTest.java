@@ -1,6 +1,7 @@
 package com.ecommerce.ecommerce.controller;
 
 import com.ecommerce.ecommerce.dto.ProdutoDTO;
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
@@ -66,6 +67,27 @@ public class ProdutoControllerTest {
                 .body("nome", equalTo("Produto C"))
                 .body("preco", equalTo(150.0f))
                 .body("quantidadeEmEstoque", equalTo(20));
+    }
+
+    @Test
+    @DisplayName("Should return 400 when trying to create a product that already exists")
+    public void CadastrarProdutoTest2() {
+
+        ProdutoDTO produtoDTO = new ProdutoDTO(1, "Produto C", 150.0, 20);
+
+        when(this.produtoService.cadastrarProduto(any(Produto.class)))
+                .thenThrow(new ProdutoExistsException(1));
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(produtoDTO)
+
+                .when()
+                .post("/api/produtos/cadastrar")
+
+                .then()
+                .statusCode(HttpStatus.CONFLICT.value())
+                .body("message", equalTo("Já existe um produto cadastrado com o id: 1"));
     }
 
     @Test
