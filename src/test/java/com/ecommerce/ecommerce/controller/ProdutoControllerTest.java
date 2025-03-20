@@ -102,7 +102,7 @@ public class ProdutoControllerTest {
                 .post("/api/produtos/cadastrar")
 
                 .then()
-                .statusCode(HttpStatus.BAD_REQUEST.value());  // Esperando 400 Bad Request
+                .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 
     @Test
