@@ -79,4 +79,17 @@ public class ProdutoControllerTest {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("message", equalTo("Produto não encontrado com o id: 1"));
     }
+
+    @Test
+    @DisplayName("Should return 400 when ID is not a valid number")
+    public void VisualizarProdutoTest3() {
+        given()
+                .accept(ContentType.JSON)
+
+        .when()
+                .get("/api/produtos/visualizar/{id}", "abc")
+
+        .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
 }
