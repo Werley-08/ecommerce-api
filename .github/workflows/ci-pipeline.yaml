@@ -5,7 +5,7 @@ on:
     branches:
       - main
       - developer
-      - ci-setup
+
   pull_request:
     branches:
       - main
