@@ -1,5 +1,6 @@
 package com.ecommerce.ecommerce.controller;
 
+import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
@@ -20,6 +21,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(ProdutoController.class)
@@ -39,6 +41,31 @@ public class ProdutoControllerTest {
     @BeforeEach
     public void setUp() {
         standaloneSetup(this.produtoController, new GlobalExceptionHandler());
+    }
+
+    @Test
+    @DisplayName("Should successfully create a product")
+    public void CadastrarProdutoTest1() {
+
+        ProdutoDTO produtoDTO = new ProdutoDTO(null, "Produto C", 150.0, 20);
+        Produto savedProduto = new Produto(1, "Produto C", 150.0, 20);
+
+        when(this.produtoService.cadastrarProduto(any(Produto.class)))
+                .thenReturn(savedProduto);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(produtoDTO)
+
+        .when()
+                .post("/api/produtos/cadastrar")
+
+        .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("id", equalTo(1))
+                .body("nome", equalTo("Produto C"))
+                .body("preco", equalTo(150.0f))
+                .body("quantidadeEmEstoque", equalTo(20));
     }
 
     @Test
