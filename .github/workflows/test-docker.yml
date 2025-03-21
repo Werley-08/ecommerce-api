@@ -26,15 +26,10 @@ jobs:
           sudo curl -L "https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
           sudo chmod +x /usr/local/bin/docker-compose
 
-      - name: Build and run Docker containers
+      - name: Build and validate container
         run: |
-          docker-compose -f docker-compose.yml build
-          
-          docker-compose -f docker-compose.yml up -d
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          docker exec -t my_db sh -c "until nc -z localhost 5432; do echo waiting for postgres; sleep 3; done;"
+          docker-compose -f docker-compose.yml up --build -d
+          sleep 30
 
       - name: Run Tests
         run: |
