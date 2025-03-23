@@ -36,7 +36,7 @@ de aplicações Spring.
 
 ### 📄 Como Acessar a Documentação da API no Swagger
 
-Rode o spring no terminal da IDE, usando o comando:
+Com o repositório clonado, rode o spring no terminal da IDE, usando o comando:
 
     - "./mvnw spring-boot:run"
 
@@ -47,3 +47,15 @@ Se não funcionar, tente re-sincronizar as dependencias do maven, usando o coman
     - "./mvnw clean install -U"
 
 Depois, rode o spring novamente
+
+### 📦 Como Executar a API com Docker Compose
+
+Com o repositório clonado, contrua a imagem, usando o comando:
+
+    - "docker-compose build"
+
+Depois, suba o container, usando o comando:
+
+    - "docker-compose up"
+
+- Acesse: O servidor estará disponível em http://localhost:8080.
