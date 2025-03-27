@@ -28,6 +28,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(ProdutoController.class)
@@ -222,6 +223,7 @@ public class ProdutoControllerTest {
     @Test
     @DisplayName("Should return 400 when ID is not a valid number")
     public void VisualizarProdutoTest3() {
+
         given()
                 .accept(ContentType.JSON)
 
@@ -230,5 +232,21 @@ public class ProdutoControllerTest {
 
         .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Should successfully delete a product")
+    public void DeletarProdutoTest1() {
+
+        doNothing().when(this.produtoService).deletarProduto(1);
+
+        given()
+                .accept(ContentType.JSON)
+
+                .when()
+                .delete("/api/produtos/deletar/{id}", "1")
+
+                .then()
+                .statusCode(HttpStatus.OK.value());
     }
 }
