@@ -42,6 +42,9 @@ public class ProdutoService implements IProdutoService {
 
     @Override
     public void deletarProduto(Integer id){
+        Produto produto = produtoRepository.findById(id)
+                .orElseThrow(() -> new ProdutoNotFoundException(id));
+
         produtoRepository.deleteById(id);
     }
 
