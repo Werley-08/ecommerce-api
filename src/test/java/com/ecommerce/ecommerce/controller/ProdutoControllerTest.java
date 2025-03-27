@@ -28,8 +28,7 @@ import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @WebMvcTest(ProdutoController.class)
 @Import({SecurityConfigurationsTests.class, GlobalExceptionHandler.class})
@@ -248,5 +247,22 @@ public class ProdutoControllerTest {
 
                 .then()
                 .statusCode(HttpStatus.OK.value());
+    }
+
+    @Test
+    @DisplayName("Should return 404, when the id is invalid")
+    public void DeletarProdutoTest2() {
+
+        doThrow(new ProdutoNotFoundException(1)).when(this.produtoService).deletarProduto(1);
+
+        given()
+                .accept(ContentType.JSON)
+
+                .when()
+                .delete("/api/produtos/deletar/{id}", "1")
+
+                .then()
+                .statusCode(HttpStatus.NOT_FOUND.value())
+                .body("message", equalTo("Produto não encontrado com o id: 1"));
     }
 }
