@@ -92,7 +92,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 400 when trying to create a product with empty body")
-    public void CadastrarProdutoTest4() {
+    public void CadastrarProdutoTest3() {
 
         given()
                 .contentType(ContentType.JSON)
