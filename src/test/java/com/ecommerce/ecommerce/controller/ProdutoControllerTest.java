@@ -25,6 +25,7 @@ import java.util.List;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -157,6 +158,26 @@ public class ProdutoControllerTest {
                 .body("nome", hasItems("Produto A"))
                 .body("preco", hasItems(100.0f))
                 .body("quantidadeEmEstoque", hasItems(10));
+    }
+
+    @Test
+    @DisplayName("Should get a empty array")
+    public void VisualizarProdutosTest3() {
+
+        List<Produto> produtos = new ArrayList<>();
+
+        when(this.produtoService.visualizarProdutos())
+                .thenReturn(produtos);
+
+        given()
+                .accept(ContentType.JSON)
+
+                .when()
+                .get("/api/produtos/visualizarTodos")
+
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("", hasSize(0));
     }
 
     @Test
