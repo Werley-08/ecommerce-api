@@ -19,8 +19,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
+import static org.hamcrest.Matchers.hasItems;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -103,6 +107,32 @@ public class ProdutoControllerTest {
 
                 .then()
                 .statusCode(HttpStatus.BAD_REQUEST.value());
+    }
+
+    @Test
+    @DisplayName("Should successfully get all the products")
+    public void VisualizarProdutosTest1() {
+
+        List<Produto> produtos = new ArrayList<>();
+        produtos.add(new Produto(1, "Produto A", 100.0, 10));
+        produtos.add(new Produto(2, "Produto B", 200.0, 20));
+        produtos.add(new Produto(3, "Produto C", 300.0, 30));
+
+        when(this.produtoService.visualizarProdutos())
+                .thenReturn(produtos);
+
+        given()
+                .accept(ContentType.JSON)
+
+                .when()
+                .get("/api/produtos/visualizarTodos")
+
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("id", hasItems(1, 2, 3))
+                .body("nome", hasItems("Produto A", "Produto B", "Produto C"))
+                .body("preco", hasItems(100.0f, 200.0f, 300.0f))
+                .body("quantidadeEmEstoque", hasItems(10, 20, 30));
     }
 
     @Test
