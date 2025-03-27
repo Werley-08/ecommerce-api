@@ -265,4 +265,29 @@ public class ProdutoControllerTest {
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("message", equalTo("Produto não encontrado com o id: 1"));
     }
+
+    @Test
+    @DisplayName("Should successfully update a product")
+    public void AtualizarProdutoTest1() {
+
+        ProdutoDTO produtoDTO = new ProdutoDTO(1, "Produto X", 150.0, 20);
+
+        when(this.produtoService.atualizarProduto(anyInt(), any(Produto.class)))
+                .thenReturn(new Produto(1, "Produto X", 150.0, 20));
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(produtoDTO)
+
+                .when()
+                .put("/api/produtos/atualizar/{id}", "1")
+
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("id", equalTo(1))
+                .body("nome", equalTo("Produto X"))
+                .body("preco", equalTo(150.0f))
+                .body("quantidadeEmEstoque", equalTo(20));
+
+    }
 }
