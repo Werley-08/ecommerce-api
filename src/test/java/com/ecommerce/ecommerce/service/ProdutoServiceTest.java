@@ -1,6 +1,6 @@
 package com.ecommerce.ecommerce.service;
 
-import com.ecommerce.ecommerce.dto.ProdutoDTO;
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
 import com.ecommerce.ecommerce.infra.security.SecurityFilter;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -62,4 +62,22 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).findById(anyInt());
         verify(produtoRepository, times(1)).save(any(Produto.class));
     }
+
+    @Test
+    @DisplayName("Should throw exception when trying to create a product that already exists")
+    public void CadastrarProdutoTest2(){
+
+        Produto produto = new Produto(1, "Produto C", 150.0, 20);
+
+        when(this.produtoRepository.findById(anyInt()))
+            .thenReturn(Optional.of(produto));
+
+        assertThrows(ProdutoExistsException.class, () -> {
+            produtoService.cadastrarProduto(produto);
+        });
+
+        verify(produtoRepository, times(1)).findById(anyInt());
+        verify(produtoRepository, never()).save(any(Produto.class));
+    }
+
 }
