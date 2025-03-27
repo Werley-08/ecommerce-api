@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class UsuarioRepositoryImplement implements IUsuarioRepository {
 
@@ -26,4 +29,7 @@ public class UsuarioRepositoryImplement implements IUsuarioRepository {
     public Usuario save(Usuario usuario){
         return usuarioRepository.save(usuario);
     }
+
+    @Override
+    public List<Usuario> findAll(){ return usuarioRepository.findAll(); }
 }

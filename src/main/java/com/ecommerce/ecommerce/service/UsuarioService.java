@@ -13,6 +13,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioService implements IUsuarioService{
 
@@ -29,6 +31,7 @@ public class UsuarioService implements IUsuarioService{
         this.tokenService = tokenService;
     }
 
+    @Override
     public Usuario cadastrarUsuario(Usuario usuario){
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
         return usuarioRepository.save(usuario);
@@ -42,5 +45,10 @@ public class UsuarioService implements IUsuarioService{
         var token = tokenService.generatedToken((Usuario) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
+    }
+
+    @Override
+    public List<Usuario> visualizarUsuarios(){
+        return usuarioRepository.findAll();
     }
 }
