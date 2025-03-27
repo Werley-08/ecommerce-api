@@ -136,6 +136,30 @@ public class ProdutoControllerTest {
     }
 
     @Test
+    @DisplayName("Should get only one product")
+    public void VisualizarProdutosTest2() {
+
+        List<Produto> produtos = new ArrayList<>();
+        produtos.add(new Produto(1, "Produto A", 100.0, 10));
+
+        when(this.produtoService.visualizarProdutos())
+                .thenReturn(produtos);
+
+        given()
+                .accept(ContentType.JSON)
+
+                .when()
+                .get("/api/produtos/visualizarTodos")
+
+                .then()
+                .statusCode(HttpStatus.OK.value())
+                .body("id", hasItems(1))
+                .body("nome", hasItems("Produto A"))
+                .body("preco", hasItems(100.0f))
+                .body("quantidadeEmEstoque", hasItems(10));
+    }
+
+    @Test
     @DisplayName("Should get 'produto' when the id is valid")
     public void VisualizarProdutoTest1() {
 
