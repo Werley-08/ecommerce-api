@@ -3,6 +3,7 @@ package com.ecommerce.ecommerce.controller;
 import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
+import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
 import com.ecommerce.ecommerce.infra.security.SecurityFilter;
@@ -310,5 +311,26 @@ public class ProdutoControllerTest {
                 .then()
                 .statusCode(HttpStatus.NOT_FOUND.value())
                 .body("message", equalTo("Produto não encontrado com o id: 1"));
+    }
+
+    @Test
+    @DisplayName("Should return 400, when try to update the id")
+    public void AtualizarProdutoTest3() {
+
+        ProdutoDTO produtoDTO = new ProdutoDTO(2, "Produto X", 150.0, 20);
+
+        when(this.produtoService.atualizarProduto(anyInt(), any(Produto.class)))
+                .thenThrow(new ProdutoUpdateException());
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(produtoDTO)
+
+                .when()
+                .put("/api/produtos/atualizar/{id}", "1")
+
+                .then()
+                .statusCode(HttpStatus.BAD_REQUEST.value())
+                .body("message", equalTo("O id do produto não pode ser atualizado"));
     }
 }
