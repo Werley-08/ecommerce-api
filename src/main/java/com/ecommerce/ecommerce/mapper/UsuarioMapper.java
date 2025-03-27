@@ -1,8 +1,6 @@
 package com.ecommerce.ecommerce.mapper;
 
-import com.ecommerce.ecommerce.dto.ProdutoDTO;
 import com.ecommerce.ecommerce.dto.UsuarioDTO;
-import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.model.Usuario;
 
 import java.util.List;
