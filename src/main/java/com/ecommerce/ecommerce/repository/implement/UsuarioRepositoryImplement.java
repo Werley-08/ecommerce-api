@@ -32,4 +32,7 @@ public class UsuarioRepositoryImplement implements IUsuarioRepository {
 
     @Override
     public List<Usuario> findAll(){ return usuarioRepository.findAll(); }
+
+    @Override
+    public Optional<Usuario> findById(Integer id){ return usuarioRepository.findById(id); }
 }

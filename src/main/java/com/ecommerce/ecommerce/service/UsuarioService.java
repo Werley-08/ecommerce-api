@@ -2,6 +2,8 @@ package com.ecommerce.ecommerce.service;
 
 import com.ecommerce.ecommerce.dto.AuthDTO;
 import com.ecommerce.ecommerce.dto.LoginResponseDTO;
+import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
+import com.ecommerce.ecommerce.exception.UsuarioNotFoundException;
 import com.ecommerce.ecommerce.infra.security.TokenService;
 import com.ecommerce.ecommerce.model.Usuario;
 import com.ecommerce.ecommerce.repository.interfaces.IUsuarioRepository;
@@ -14,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService implements IUsuarioService{
@@ -48,7 +51,14 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public List<Usuario> visualizarUsuarios(){
-        return usuarioRepository.findAll();
+    public List<Usuario> visualizarUsuarios(){ return usuarioRepository.findAll(); }
+
+    @Override
+    public Usuario visualizarUsuario(Integer id){
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
+
+        usuario.setSenha(null);
+        return usuario;
     }
 }

@@ -37,4 +37,9 @@ public class UsuarioController{
     public List<UsuarioDTO> visualizarUsuarios(){
         return toDTO(usuarioService.visualizarUsuarios());
     }
+
+    @GetMapping("/visualizar/{id}")
+    public UsuarioDTO visualizarUsuario(@PathVariable Integer id){
+        return toDTO(usuarioService.visualizarUsuario(id));
+    }
 }
