@@ -17,7 +17,7 @@ de aplicações Spring.
 #### Autenticação
 
 - **Autenticação de usuários**: A API realiza o login utilizando autenticação com tokens JWT.
-- **Gerenciamento de usuários**: Administradores podem listar, atualizar ou excluir usuários, além de atribuir ou alterar permissões de acesso.
+- **Gerenciamento de usuários**: Administradores podem listar, atualizar ou excluir usuários.
 - **Controle de permissões**: Usuários normais têm acesso às funcionalidades de consulta de produtos, enquanto administradores possuem permissões para gerenciar produtos.
 
 ---

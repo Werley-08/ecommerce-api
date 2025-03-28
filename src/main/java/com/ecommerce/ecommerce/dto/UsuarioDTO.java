@@ -16,4 +16,10 @@ public class UsuarioDTO{
     private String login;
     private String senha;
     private UserRole role;
+
+    public UsuarioDTO(Integer id, String login, UserRole role) {
+        this.id = id;
+        this.login = login;
+        this.role = role;
+    }
 }
