@@ -33,12 +33,22 @@ public class SecurityConfigurations{
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+
+                        // Usuarios
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/usuarios/cadastrar").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/produtos").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/produtos").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/produtos").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .requestMatchers(HttpMethod.POST, "/api/usuarios/cadastrar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizarTodos").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizar").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/usuarios/deletar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/usuarios/atualizar").hasRole("ADMIN")
+
+                        // Produtos
+                        .requestMatchers(HttpMethod.POST, "/api/produtos/cadastrar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/produtos/visualizarTodos").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/produtos/visualizar").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/produtos/deletar").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/api/produtos/atualizar").hasRole("ADMIN")
+
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                .build();
