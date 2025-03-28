@@ -2,6 +2,7 @@ package com.ecommerce.ecommerce.service;
 
 import com.ecommerce.ecommerce.dto.AuthDTO;
 import com.ecommerce.ecommerce.dto.LoginResponseDTO;
+import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.UsuarioNotFoundException;
 import com.ecommerce.ecommerce.infra.security.TokenService;
 import com.ecommerce.ecommerce.model.Usuario;
@@ -34,8 +35,15 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public Usuario cadastrarUsuario(Usuario usuario){
+
+        if(usuarioRepository.findById(usuario.getId()).isPresent()){
+            throw new ProdutoExistsException(usuario.getId());
+        }
+
         usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
-        return usuarioRepository.save(usuario);
+        usuarioRepository.save(usuario);
+        usuario.setSenha(null);
+        return usuario;
     }
 
     @Override
