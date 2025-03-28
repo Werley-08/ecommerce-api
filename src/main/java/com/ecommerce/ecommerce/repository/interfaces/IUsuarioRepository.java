@@ -11,4 +11,5 @@ public interface IUsuarioRepository{
     Usuario save(Usuario usuario);
     List<Usuario> findAll();
     Optional<Usuario> findById(Integer id);
+    void deleteById(Integer id);
 }

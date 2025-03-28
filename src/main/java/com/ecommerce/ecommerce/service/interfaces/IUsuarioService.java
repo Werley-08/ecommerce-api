@@ -11,4 +11,5 @@ public interface IUsuarioService{
     ResponseEntity logarUsuario(AuthDTO usuario);
     List<Usuario> visualizarUsuarios();
     Usuario visualizarUsuario(Integer id);
+    void deletarUsuario(Integer id);
 }

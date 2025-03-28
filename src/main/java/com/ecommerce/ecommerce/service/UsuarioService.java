@@ -59,4 +59,12 @@ public class UsuarioService implements IUsuarioService{
         usuario.setSenha(null);
         return usuario;
     }
+
+    @Override
+    public void deletarUsuario(Integer id){
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
+
+        usuarioRepository.deleteById(id);
+    }
 }

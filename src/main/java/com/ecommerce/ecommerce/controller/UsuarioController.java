@@ -42,4 +42,9 @@ public class UsuarioController{
     public UsuarioDTO visualizarUsuario(@PathVariable Integer id){
         return toDTO(usuarioService.visualizarUsuario(id));
     }
+
+    @DeleteMapping("/deletar/{id}")
+    public void deletarUsuario(@PathVariable Integer id){
+        usuarioService.deletarUsuario(id);
+    }
 }

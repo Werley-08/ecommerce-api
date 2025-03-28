@@ -35,4 +35,7 @@ public class UsuarioRepositoryImplement implements IUsuarioRepository {
 
     @Override
     public Optional<Usuario> findById(Integer id){ return usuarioRepository.findById(id); }
+
+    @Override
+    public void deleteById(Integer id){ usuarioRepository.deleteById(id); }
 }
