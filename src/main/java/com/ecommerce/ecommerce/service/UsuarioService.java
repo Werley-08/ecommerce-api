@@ -2,9 +2,9 @@ package com.ecommerce.ecommerce.service;
 
 import com.ecommerce.ecommerce.dto.AuthDTO;
 import com.ecommerce.ecommerce.dto.LoginResponseDTO;
-import com.ecommerce.ecommerce.exception.ProdutoExistsException;
-import com.ecommerce.ecommerce.exception.UsuarioNotFoundException;
+import com.ecommerce.ecommerce.exception.*;
 import com.ecommerce.ecommerce.infra.security.TokenService;
+import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.model.Usuario;
 import com.ecommerce.ecommerce.repository.interfaces.IUsuarioRepository;
 import com.ecommerce.ecommerce.service.interfaces.IUsuarioService;
@@ -74,5 +74,30 @@ public class UsuarioService implements IUsuarioService{
                 .orElseThrow(() -> new UsuarioNotFoundException(id));
 
         usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Usuario atualizarUsuario(Integer id, Usuario usuarioAtualizado){
+
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new UsuarioNotFoundException(id));
+
+        if(!usuario.getId().equals(usuarioAtualizado.getId())) {
+            throw new UsuarioUpdateIdException();
+        }
+
+        if(!usuario.getRole().equals(usuarioAtualizado.getRole())) {
+            throw new UsuarioUpdateRoleException();
+        }
+
+        if(usuarioAtualizado.getSenha() == null) {
+            throw new UsuarioUpdateSenhaException();
+        }
+
+        deletarUsuario(usuario.getId());
+        usuarioRepository.save(usuarioAtualizado);
+        usuarioAtualizado.setSenha(null);
+
+        return usuarioAtualizado;
     }
 }

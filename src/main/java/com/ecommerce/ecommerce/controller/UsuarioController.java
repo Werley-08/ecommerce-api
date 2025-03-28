@@ -47,4 +47,9 @@ public class UsuarioController{
     public void deletarUsuario(@PathVariable Integer id){
         usuarioService.deletarUsuario(id);
     }
+
+    @PutMapping("/atualizar/{id}")
+    public UsuarioDTO atualizarUsuario(@PathVariable Integer id, @RequestBody UsuarioDTO usuarioDTO){
+        return toDTO(usuarioService.atualizarUsuario(id, toModel(usuarioDTO)));
+    }
 }

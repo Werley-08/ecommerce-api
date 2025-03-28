@@ -1,6 +1,7 @@
 package com.ecommerce.ecommerce.service.interfaces;
 
 import com.ecommerce.ecommerce.dto.AuthDTO;
+import com.ecommerce.ecommerce.model.Produto;
 import com.ecommerce.ecommerce.model.Usuario;
 import org.springframework.http.ResponseEntity;
 
@@ -12,4 +13,5 @@ public interface IUsuarioService{
     List<Usuario> visualizarUsuarios();
     Usuario visualizarUsuario(Integer id);
     void deletarUsuario(Integer id);
+    Usuario atualizarUsuario(Integer id, Usuario usuarioAtualizado);
 }
