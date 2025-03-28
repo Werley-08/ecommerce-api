@@ -95,6 +95,7 @@ public class UsuarioService implements IUsuarioService{
         }
 
         deletarUsuario(usuario.getId());
+        usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
         usuarioRepository.save(usuarioAtualizado);
         usuarioAtualizado.setSenha(null);
 
