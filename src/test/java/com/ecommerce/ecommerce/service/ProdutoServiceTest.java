@@ -171,4 +171,24 @@ public class ProdutoServiceTest{
 
         verify(produtoRepository, times(1)).findById(anyInt());
     }
+
+    @Test
+    @DisplayName("Should successfully update a product")
+    public void atualizarProdutoTest1(){
+
+        Produto produtoAtual = new Produto(1, "Produto C", 150.0, 20);
+        Produto produtoAtualizado = new Produto(1, "Produto D", 10.0, 10);
+
+        when(this.produtoRepository.findById(anyInt()))
+                .thenReturn(Optional.of(produtoAtual));
+
+        when(this.produtoRepository.save(any()))
+                .thenReturn(produtoAtualizado);
+
+        Produto produtoObtido = produtoService.atualizarProduto(produtoAtual.getId(), produtoAtualizado);
+
+        assertEquals(produtoAtualizado, produtoObtido);
+        verify(produtoRepository, times(1)).deleteById(anyInt());
+        verify(produtoRepository, times(1)).save(any());
+    }
 }
