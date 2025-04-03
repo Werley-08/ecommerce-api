@@ -52,7 +52,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should successfully create a product")
-    public void CadastrarProdutoTest1() {
+    public void cadastrarProdutoTest1() {
 
         ProdutoDTO produtoDTO = new ProdutoDTO(null, "Produto C", 150.0, 20);
         Produto savedProduto = new Produto(1, "Produto C", 150.0, 20);
@@ -77,7 +77,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 400 when trying to create a product that already exists")
-    public void CadastrarProdutoTest2() {
+    public void cadastrarProdutoTest2() {
 
         ProdutoDTO produtoDTO = new ProdutoDTO(1, "Produto C", 150.0, 20);
 
@@ -98,7 +98,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 400 when trying to create a product with empty body")
-    public void CadastrarProdutoTest3() {
+    public void cadastrarProdutoTest3() {
 
         given()
                 .contentType(ContentType.JSON)
@@ -113,7 +113,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should successfully get all the products")
-    public void VisualizarProdutosTest1() {
+    public void visualizarProdutosTest1() {
 
         List<Produto> produtos = new ArrayList<>();
         produtos.add(new Produto(1, "Produto A", 100.0, 10));
@@ -139,7 +139,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should get only one product")
-    public void VisualizarProdutosTest2() {
+    public void visualizarProdutosTest2() {
 
         List<Produto> produtos = new ArrayList<>();
         produtos.add(new Produto(1, "Produto A", 100.0, 10));
@@ -163,7 +163,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should get a empty array")
-    public void VisualizarProdutosTest3() {
+    public void visualizarProdutosTest3() {
 
         List<Produto> produtos = new ArrayList<>();
 
@@ -183,7 +183,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should get 'produto' when the id is valid")
-    public void VisualizarProdutoTest1() {
+    public void visualizarProdutoTest1() {
 
         when(this.produtoService.visualizarProduto(1))
                 .thenReturn(new Produto(1, "Produto A", 100.0, 10));
@@ -204,7 +204,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 404 when the id is invalid")
-    public void VisualizarProdutoTest2() {
+    public void visualizarProdutoTest2() {
 
         when(this.produtoService.visualizarProduto(1))
                 .thenThrow(new ProdutoNotFoundException(1));
@@ -222,7 +222,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 400 when ID is not a valid number")
-    public void VisualizarProdutoTest3() {
+    public void visualizarProdutoTest3() {
 
         given()
                 .accept(ContentType.JSON)
@@ -236,7 +236,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should successfully delete a product")
-    public void DeletarProdutoTest1() {
+    public void deletarProdutoTest1() {
 
         doNothing().when(this.produtoService).deletarProduto(1);
 
@@ -252,7 +252,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 404, when the id is invalid")
-    public void DeletarProdutoTest2() {
+    public void deletarProdutoTest2() {
 
         doThrow(new ProdutoNotFoundException(1)).when(this.produtoService).deletarProduto(1);
 
@@ -269,7 +269,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should successfully update a product")
-    public void AtualizarProdutoTest1() {
+    public void atualizarProdutoTest1() {
 
         ProdutoDTO produtoDTO = new ProdutoDTO(1, "Produto X", 150.0, 20);
 
@@ -294,7 +294,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 404, when the id is invalid")
-    public void AtualizarProdutoTest2() {
+    public void atualizarProdutoTest2() {
 
         ProdutoDTO produtoDTO = new ProdutoDTO(1, "Produto X", 150.0, 20);
 
@@ -315,7 +315,7 @@ public class ProdutoControllerTest {
 
     @Test
     @DisplayName("Should return 400, when try to update the id")
-    public void AtualizarProdutoTest3() {
+    public void atualizarProdutoTest3() {
 
         ProdutoDTO produtoDTO = new ProdutoDTO(2, "Produto X", 150.0, 20);
 

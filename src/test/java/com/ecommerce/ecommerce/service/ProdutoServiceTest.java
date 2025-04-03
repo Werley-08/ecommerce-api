@@ -47,7 +47,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should successfully create a product")
-    public void CadastrarProdutoTest1(){
+    public void cadastrarProdutoTest1(){
 
         Produto produto = new Produto(1, "Produto C", 150.0, 20);
 
@@ -66,7 +66,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should throw exception when trying to create a product that already exists")
-    public void CadastrarProdutoTest2(){
+    public void cadastrarProdutoTest2(){
 
         Produto produto = new Produto(1, "Produto C", 150.0, 20);
 
@@ -83,7 +83,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should successfully get all the products")
-    public void VisualizarProdutosTest1(){
+    public void visualizarProdutosTest1(){
 
         Produto produto1 = new Produto(1, "Produto C", 150.0, 20);
         Produto produto2 = new Produto(2, "Produto D", 10.0, 10);
@@ -103,7 +103,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should get a empty list of products")
-    public void VisualizarProdutosTest2(){
+    public void visualizarProdutosTest2(){
 
         when(this.produtoRepository.findAll())
                 .thenReturn(List.of());
@@ -116,7 +116,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should successfully get the product")
-    public void VisualizarProdutoTest1(){
+    public void visualizarProdutoTest1(){
 
         Produto produto = new Produto(1, "Produto C", 150.0, 20);
 
@@ -131,7 +131,7 @@ public class ProdutoServiceTest{
 
     @Test
     @DisplayName("Should throw exception when trying to get a product that do not exists")
-    public void VisualizarProdutoTest2(){
+    public void visualizarProdutoTest2(){
 
         when(produtoRepository.findById(anyInt()))
             .thenReturn(Optional.empty());
@@ -143,5 +143,4 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).findById(anyInt());
     }
 
-    
 }
