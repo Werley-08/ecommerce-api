@@ -113,4 +113,22 @@ public class ProdutoServiceTest{
         assertEquals(0, produtos.size());
         verify(produtoRepository, times(1)).findAll();
     }
+
+    @Test
+    @DisplayName("Should successfully get the product")
+    public void VisualizarProdutoTest1(){
+
+        Produto produto = new Produto(1, "Produto C", 150.0, 20);
+
+        when(this.produtoRepository.findById(anyInt()))
+                .thenReturn(Optional.of(produto));
+
+        Produto produtoObtido = produtoService.visualizarProduto(produto.getId());
+
+        assertEquals(produto, produtoObtido);
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
+
+    
+
 }
