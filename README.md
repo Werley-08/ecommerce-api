@@ -48,6 +48,10 @@ Se não funcionar, tente re-sincronizar as dependencias do maven, usando o coman
 
 Depois, rode o spring novamente
 
+### 📃 Como Acessar a Documentação da API no PostMan
+
+Basta acessar o link: https://documenter.getpostman.com/view/42951140/2sB2cPijsM#5c04c07b-ee70-47ac-828b-100d7d963f63
+
 ### 📦 Como Executar a API com Docker Compose
 
 Com o repositório clonado, contrua a imagem, usando o comando:

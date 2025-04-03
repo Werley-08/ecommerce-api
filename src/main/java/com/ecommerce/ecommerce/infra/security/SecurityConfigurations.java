@@ -37,8 +37,8 @@ public class SecurityConfigurations{
                         // Usuarios
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/cadastrar").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizarTodos").hasRole("USER")
-                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizar").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizarTodos").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios/visualizar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/api/usuarios/deletar").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/usuarios/atualizar").hasRole("ADMIN")
 
