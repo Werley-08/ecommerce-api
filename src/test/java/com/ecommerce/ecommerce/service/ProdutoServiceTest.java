@@ -16,6 +16,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.List;
 import java.util.Optional;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
@@ -80,4 +81,23 @@ public class ProdutoServiceTest{
         verify(produtoRepository, never()).save(any(Produto.class));
     }
 
+    @Test
+    @DisplayName("Should successfully get all the products")
+    public void VisualizarProdutosTest1(){
+
+        Produto produto1 = new Produto(1, "Produto C", 150.0, 20);
+        Produto produto2 = new Produto(2, "Produto D", 10.0, 10);
+        Produto produto3 = new Produto(3, "Produto E", 3000.0, 5);
+
+        when(this.produtoService.visualizarProdutos())
+                .thenReturn(List.of(produto1, produto2, produto3));
+
+        List<Produto> produtos = produtoService.visualizarProdutos();
+
+        assertEquals(3, produtos.size());
+        assertEquals(produto1, produtos.get(0));
+        assertEquals(produto2, produtos.get(1));
+        assertEquals(produto3, produtos.get(2));
+        verify(produtoRepository, times(1)).findAll();
+    }
 }
