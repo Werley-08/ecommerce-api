@@ -157,4 +157,18 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).deleteById(anyInt());
         verify(produtoRepository, times(1)).findById(anyInt());
     }
+
+    @Test
+    @DisplayName("Should throw exception when trying to delete a product that do not exists")
+    public void deletarProdutoTest2(){
+
+        when(produtoRepository.findById(anyInt()))
+                .thenReturn(Optional.empty());
+
+        assertThrows(ProdutoNotFoundException.class, () -> {
+            produtoService.deletarProduto(anyInt());
+        });
+
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
 }
