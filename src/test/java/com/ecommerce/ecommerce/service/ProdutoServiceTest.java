@@ -2,6 +2,7 @@ package com.ecommerce.ecommerce.service;
 
 import com.ecommerce.ecommerce.exception.ProdutoExistsException;
 import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
+import com.ecommerce.ecommerce.exception.ProdutoUpdateException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
 import com.ecommerce.ecommerce.infra.security.SecurityFilter;
@@ -203,6 +204,23 @@ public class ProdutoServiceTest{
 
         assertThrows(ProdutoNotFoundException.class, () -> {
            produtoService.atualizarProduto(produto.getId(), produto);
+        });
+
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
+
+    @Test
+    @DisplayName("Should throw exception when trying to update the product's id")
+    public void atualizarProdutoTest3(){
+
+        Produto produtoAtual = new Produto(1, "Produto C", 150.0, 20);
+        Produto produtoAtualizado = new Produto(2, "Produto D", 10.0, 10);
+
+        when(this.produtoRepository.findById(anyInt()))
+            .thenReturn(Optional.of(produtoAtual));
+
+        assertThrows(ProdutoUpdateException.class, () -> {
+            produtoService.atualizarProduto(produtoAtual.getId(), produtoAtualizado);
         });
 
         verify(produtoRepository, times(1)).findById(anyInt());
