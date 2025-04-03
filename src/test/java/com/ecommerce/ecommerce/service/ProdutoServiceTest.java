@@ -89,7 +89,7 @@ public class ProdutoServiceTest{
         Produto produto2 = new Produto(2, "Produto D", 10.0, 10);
         Produto produto3 = new Produto(3, "Produto E", 3000.0, 5);
 
-        when(this.produtoService.visualizarProdutos())
+        when(this.produtoRepository.findAll())
                 .thenReturn(List.of(produto1, produto2, produto3));
 
         List<Produto> produtos = produtoService.visualizarProdutos();
