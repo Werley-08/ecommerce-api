@@ -191,4 +191,20 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).deleteById(anyInt());
         verify(produtoRepository, times(1)).save(any());
     }
+
+    @Test
+    @DisplayName("Should throw exception when trying to update a product that do not exists")
+    public void atualizarProdutoTest2(){
+
+        Produto produto = new Produto(1, "Produto C", 150.0, 20);
+
+        when(produtoRepository.findById(anyInt()))
+            .thenReturn(Optional.empty());
+
+        assertThrows(ProdutoNotFoundException.class, () -> {
+           produtoService.atualizarProduto(produto.getId(), produto);
+        });
+
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
 }
