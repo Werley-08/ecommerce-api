@@ -1,6 +1,7 @@
 package com.ecommerce.ecommerce.service;
 
 import com.ecommerce.ecommerce.exception.ProdutoExistsException;
+import com.ecommerce.ecommerce.exception.ProdutoNotFoundException;
 import com.ecommerce.ecommerce.infra.exception.GlobalExceptionHandler;
 import com.ecommerce.ecommerce.infra.security.SecurityConfigurationsTests;
 import com.ecommerce.ecommerce.infra.security.SecurityFilter;
@@ -20,8 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.standaloneSetup;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
@@ -129,6 +129,19 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).findById(anyInt());
     }
 
-    
+    @Test
+    @DisplayName("Should throw exception when trying to get a product that do not exists")
+    public void VisualizarProdutoTest2(){
 
+        when(produtoRepository.findById(anyInt()))
+            .thenReturn(Optional.empty());
+
+        assertThrows(ProdutoNotFoundException.class, () -> {
+            produtoService.visualizarProduto(anyInt());
+        });
+
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
+
+    
 }
