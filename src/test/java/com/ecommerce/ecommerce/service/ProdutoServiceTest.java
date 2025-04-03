@@ -143,4 +143,18 @@ public class ProdutoServiceTest{
         verify(produtoRepository, times(1)).findById(anyInt());
     }
 
+    @Test
+    @DisplayName("Should successfully delete a product")
+    public void deletarProdutoTest1(){
+
+        Produto produto = new Produto(1, "Produto C", 150.0, 20);
+
+        when(this.produtoRepository.findById(anyInt()))
+                .thenReturn(Optional.of(produto));
+
+        produtoService.deletarProduto(produto.getId());
+
+        verify(produtoRepository, times(1)).deleteById(anyInt());
+        verify(produtoRepository, times(1)).findById(anyInt());
+    }
 }
