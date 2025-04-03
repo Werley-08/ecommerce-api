@@ -100,4 +100,17 @@ public class ProdutoServiceTest{
         assertEquals(produto3, produtos.get(2));
         verify(produtoRepository, times(1)).findAll();
     }
+
+    @Test
+    @DisplayName("Should get a empty list of products")
+    public void VisualizarProdutosTest2(){
+
+        when(this.produtoRepository.findAll())
+                .thenReturn(List.of());
+
+        List<Produto> produtos = produtoService.visualizarProdutos();
+
+        assertEquals(0, produtos.size());
+        verify(produtoRepository, times(1)).findAll();
+    }
 }
